@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from 'react-router-dom';
 const Signup = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", password: "" });
 
@@ -16,9 +17,10 @@ const Signup = () => {
 
     console.log("Submitting form:", formData); // Debugging log
 
-    axios.post('http://localhost:5000/register', formData)
+    axios.post('http://localhost:5000/register', formData, {withCredentials:true})
         .then(result => {
             console.log("Registration successful:", result.data);
+            navigate('/');
         })
         .catch(err => {
             console.error("Error during registration:", err.response ? err.response.data : err.message);

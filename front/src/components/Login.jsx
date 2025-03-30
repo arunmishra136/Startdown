@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
+ 
 
 const Login = () => {
     
@@ -18,12 +18,10 @@ const Login = () => {
     
       const handleSubmit = async (e) => {
         e.preventDefault();
-        axios.post('http://localhost:5000/login',formData)
+        axios.post('http://localhost:5000/login',formData,{ withCredentials: true })
         .then(result => {
           console.log(result)
-          if(result.data==="Success"){
-          navigate('/home')
-          }
+          navigate('/');
         })
         .catch(err => console.log(err))
         
